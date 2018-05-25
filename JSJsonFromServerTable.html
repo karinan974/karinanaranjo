@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>IMDb Information</title>
+<meta charset="utf-8" />
+<script type="text/javascript">
+
+   function loadMovie() {
+   		var str = document.getElementById("movie").value;
+   		var xhttp = new XMLHttpRequest();
+   		xhttp.onreadystatechange = function(){
+   		if(this.readyState == 4 && this.status == 200) {
+   		var myObj = JSON.parse(this.responseText);
+   		document.getElementById("Title").innerHTML = myObj.Title;
+   		document.getElementById("Year").innerHTML = myObj.Released;
+   		document.getElementById("Rated").innerHTML = myObj.Rated;
+   		document.getElementById("RunTime").innerHTML = myObj.Runtime;
+   		document.getElementById("Genre").innerHTML = myObj.Genre;
+   		document.getElementById("Director").innerHTML = myObj.Director;
+   		document.getElementById("Actors").innerHTML = myObj.Actors;
+   		document.getElementById("Plot").innerHTML = myObj.Plot;
+   		document.getElementById("Poster1").innerHTML = myObj.Poster;
+   		}
+   		};
+   		xhttp.open("GET", "http://www.omdbapi.com/?t=" + str + "&apikey=1d06e278", true);
+   		xhttp.send();
+   		}
+   		
+   </script>
+
+</head>
+
+
+<body>
+
+<div id="content">
+    <h1>Enter the title of a Movie</h1>
+    <input id="movie">
+    <button type="button" onclick="loadMovie()">Submit</button>
+
+    <table class="table table-hover" id="imdb">
+        <thead>
+            <tr>
+                <th>Poster</th>
+                <th >Title</th>
+                <th>Year</th>
+                <th>Rated</th>
+                <th>Runtime</th>
+                <th>Genre</th>
+                <th>Director</th>
+                <th>Actors</th>
+                <th>Plot</th>
+            </tr>
+        </thead>
+        <tr>
+        <td><img id="Poster1"></td>
+        <td id="Title"></td>
+        <td id="Year"></td>
+        <td id="Rated"></td>
+        <td id="RunTime"></td>
+        <td id="Genre"></td>
+        <td id="Director"></td>
+        <td id="Actors"></td>
+        <td id="Plot"></td>
+        </tr>
+        <tbody></tbody>
+    </table>
+</div>
+
+</body>
+</html>
